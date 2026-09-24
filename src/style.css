@@ -128,3 +128,24 @@ footer { display: flex; justify-content: space-between; padding: 19px clamp(22px
 @media (max-width: 500px) {
   .format-three .card-foot { bottom: 22px; font-size: 7px; letter-spacing: .08em; max-height: 2.5em; }
 }
+
+/* The card scales as one A4 composition on every viewport. */
+.a4-sheet { container-type: inline-size; }
+.a4-sheet .bristol-card { padding: 3.97cqw; }
+.a4-sheet .card-content { gap: 5.95cqw; }
+.a4-sheet .card-content img { width: 19.5cqw; height: 19.5cqw; }
+.a4-sheet .card-copy { max-width: 57.85cqw; }
+.a4-sheet .card-eyebrow { font-size: 1.65cqw; }
+.a4-sheet .card-copy h3 { margin: 1.82cqw 0 .83cqw; font-size: 4.96cqw; }
+.a4-sheet .preview-title { font-size: 2.98cqw; }
+.a4-sheet .gold-rule { width: 10.25cqw; margin: 2.48cqw auto 1.82cqw; }
+.a4-sheet .preview-institution { font-size: 2.15cqw; }
+.a4-sheet .card-foot { bottom: 3.3cqw; padding: 0 3.97cqw; font-size: 1.16cqw; letter-spacing: .18em; }
+.a4-sheet:not(.format-three) .card-content { flex-direction: column; gap: 1.65cqw; }
+.a4-sheet:not(.format-three) .card-copy { width: 90%; max-width: 57.85cqw; max-height: calc(100% - 1.32cqw); display: flex; flex-direction: column; justify-content: center; }
+.a4-sheet:not(.format-three) .card-copy h3 { margin: 1.82cqw 0 .83cqw; }
+.a4-sheet:not(.format-three) .gold-rule { margin: 2.48cqw auto 1.82cqw; }
+.a4-sheet.format-three .card-copy { width: 78%; max-width: 57.85cqw; }
+.a4-sheet:not(.format-three) .card-content img { width: 19.5cqw; height: 19.5cqw; max-width: 19.5cqw; max-height: 19.5cqw; }
+.a4-sheet.format-three .card-content img { width: 19.5cqw; height: 19.5cqw; max-width: 19.5cqw; max-height: 19.5cqw; }
+.a4-sheet.format-three .card-foot { bottom: 3.3cqw; }
