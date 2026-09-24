@@ -1,6 +1,4 @@
 import './style.css'
-import { jsPDF } from 'jspdf'
-import html2canvas from 'html2canvas'
 
 type BristolData = {
   name: string
@@ -122,6 +120,10 @@ document.querySelector<HTMLInputElement>('#logo')!.addEventListener('change', (e
 
 document.querySelector<HTMLButtonElement>('#download-pdf')!.addEventListener('click', async () => {
   const values = Object.fromEntries(fields.map((field) => [field, (document.querySelector<HTMLInputElement>(`#${field}`)!.value || defaults[field])])) as BristolData
+  const downloadButton = document.querySelector<HTMLButtonElement>('#download-pdf')!
+  downloadButton.disabled = true
+  downloadButton.innerHTML = '<span>…</span> Préparation du PDF'
+  const [{ jsPDF }, { default: html2canvas }] = await Promise.all([import('jspdf'), import('html2canvas')])
   await document.fonts.ready
   const canvas = await html2canvas(sheet, {
     backgroundColor: '#f8f5ed',
@@ -131,4 +133,6 @@ document.querySelector<HTMLButtonElement>('#download-pdf')!.addEventListener('cl
   const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' })
   pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297)
   pdf.save(`bristol-${values.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'officiel'}.pdf`)
+  downloadButton.disabled = false
+  downloadButton.innerHTML = '<span>↓</span> Générer le PDF prêt à imprimer'
 })
