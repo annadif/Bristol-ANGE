@@ -7,6 +7,7 @@ type BristolData = {
   date: string
   eyebrow: string
   footer: string
+  standaloneTitle: string
 }
 
 const defaults: BristolData = {
@@ -16,6 +17,7 @@ const defaults: BristolData = {
   date: '24 septembre 2026',
   eyebrow: 'Honneur & protocole',
   footer: 'CÉRÉMONIE OFFICIELLE',
+  standaloneTitle: 'Membre du gouvernement',
 }
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
@@ -46,6 +48,13 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
           <label>Institution<input id="institution" name="institution" value="${defaults.institution}"></label>
           <label>Date de la cérémonie <span class="optional">optionnel</span><input id="date" name="date" value="${defaults.date}"></label>
           <div class="form-divider"></div>
+          <span class="section-index custom-section">TYPE DE BRISTOL</span>
+          <div class="format-choice" role="group" aria-label="Type de bristol">
+            <label class="format-option"><input type="radio" name="layout" value="details" checked><span>Avec informations</span><small>Nom, fonction, institution</small></label>
+            <label class="format-option"><input type="radio" name="layout" value="title-only"><span>Titre seul</span><small>Un titre centré</small></label>
+          </div>
+          <label>Titre à imprimer seul<input id="standaloneTitle" name="standaloneTitle" value="${defaults.standaloneTitle}"></label>
+          <div class="form-divider"></div>
           <span class="section-index custom-section">TEXTES DU BRISTOL</span>
           <label>Texte au-dessus du nom<input id="eyebrow" name="eyebrow" value="${defaults.eyebrow}"></label>
           <label>Texte au bas du bristol<input id="footer" name="footer" value="${defaults.footer}"></label>
@@ -64,9 +73,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
       <section class="preview-area" aria-labelledby="preview-title">
         <div class="preview-heading"><div><span class="section-index">02 / APERÇU EN DIRECT</span><h2 id="preview-title">Votre bristol</h2></div><div class="preview-tools"><span class="zoom">100 %</span><span class="dots">•••</span></div></div>
         <div class="paper-stage"><div class="a4-sheet" id="a4-sheet">
-          <div class="bristol-card"><span class="fold-label">FACE A</span><div class="card-content"><img class="preview-logo" src="/logo-ange.png" alt="Logo de l'institution"><div class="card-copy"><span class="card-eyebrow">${defaults.eyebrow}</span><h3 class="preview-name">${defaults.name}</h3><p class="preview-title">${defaults.title}</p><div class="gold-rule"></div><p class="preview-institution">${defaults.institution}</p></div></div><span class="card-foot">${defaults.footer}</span></div>
+          <div class="bristol-card"><span class="fold-label">FACE A</span><div class="card-content"><img class="preview-logo" src="/logo-ange.png" alt="Logo de l'institution"><div class="card-copy"><span class="card-eyebrow">${defaults.eyebrow}</span><h3 class="preview-name">${defaults.name}</h3><p class="preview-title">${defaults.title}</p><div class="gold-rule"></div><p class="preview-institution">${defaults.institution}</p></div></div><span class="card-foot">${defaults.footer}</span><span class="title-only-text">${defaults.standaloneTitle}</span></div>
           <div class="fold-line"><span>PLIER ICI</span></div>
-          <div class="bristol-card"><span class="fold-label">FACE B</span><div class="card-content"><img class="preview-logo" src="/logo-ange.png" alt="Logo de l'institution"><div class="card-copy"><span class="card-eyebrow">${defaults.eyebrow}</span><h3 class="preview-name">${defaults.name}</h3><p class="preview-title">${defaults.title}</p><div class="gold-rule"></div><p class="preview-institution">${defaults.institution}</p></div></div><span class="card-foot">${defaults.footer}</span></div>
+          <div class="bristol-card"><span class="fold-label">FACE B</span><div class="card-content"><img class="preview-logo" src="/logo-ange.png" alt="Logo de l'institution"><div class="card-copy"><span class="card-eyebrow">${defaults.eyebrow}</span><h3 class="preview-name">${defaults.name}</h3><p class="preview-title">${defaults.title}</p><div class="gold-rule"></div><p class="preview-institution">${defaults.institution}</p></div></div><span class="card-foot">${defaults.footer}</span><span class="title-only-text">${defaults.standaloneTitle}</span></div>
           <div class="fold-line second-fold"><span>PLIER ICI</span></div>
           <div class="blank-card"><span>PARTIE VIDE</span></div>
         </div></div>
@@ -78,7 +87,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `
 
 const form = document.querySelector<HTMLFormElement>('#bristol-form')!
-const fields = ['name', 'title', 'institution', 'date', 'eyebrow', 'footer'] as const
+const fields = ['name', 'title', 'institution', 'date', 'eyebrow', 'footer', 'standaloneTitle'] as const
 const sheet = document.querySelector<HTMLElement>('#a4-sheet')!
 
 function updateFormat() {
@@ -101,11 +110,24 @@ function updatePreview() {
   document.querySelectorAll<HTMLElement>('.preview-institution').forEach((node) => node.textContent = values.institution)
   document.querySelectorAll<HTMLElement>('.card-eyebrow').forEach((node) => node.textContent = values.eyebrow)
   document.querySelectorAll<HTMLElement>('.card-foot').forEach((node) => node.textContent = values.footer)
+  document.querySelectorAll<HTMLElement>('.title-only-text').forEach((node) => node.textContent = values.standaloneTitle)
   document.querySelector<HTMLElement>('#preview-date')!.textContent = values.date
 }
 
+function updateLayout() {
+  const isTitleOnly = document.querySelector<HTMLInputElement>('input[name="layout"]:checked')!.value === 'title-only'
+  sheet.classList.toggle('title-only', isTitleOnly)
+  document.querySelector<HTMLElement>('#format-helper')!.textContent = isTitleOnly
+    ? 'Seul le titre saisi sera imprimé, centré en grand sur chaque face.'
+    : document.querySelector<HTMLInputElement>('input[name="format"]:checked')!.value === 'three'
+      ? 'Deux faces lisibles sur les deux premiers tiers. Le tiers inférieur reste volontairement vide.'
+      : 'Deux faces identiques sur une feuille A4. Le volet supérieur est retourné pour rester lisible après pliage.'
+}
+
 form.addEventListener('input', updatePreview)
+form.addEventListener('input', updateLayout)
 form.addEventListener('change', updateFormat)
+form.addEventListener('change', updateLayout)
 
 document.querySelector<HTMLInputElement>('#logo')!.addEventListener('change', (event) => {
   const file = (event.target as HTMLInputElement).files?.[0]

@@ -151,4 +151,10 @@ footer { display: flex; justify-content: space-between; padding: 19px clamp(22px
 .a4-sheet .bristol-card::after { inset: 1.98cqw; }
 .a4-sheet .bristol-card::before { inset: 2.64cqw; }
 .a4-sheet .card-foot { font-size: max(7px, 1.16cqw); }
+.title-only .bristol-card { background: var(--paper); }
+.title-only .bristol-card::before, .title-only .bristol-card::after, .title-only .fold-label, .title-only .card-content, .title-only .card-foot, .title-only .fold-line { display: none; }
+.title-only .blank-card { color: transparent; }
+.title-only .blank-card span { visibility: hidden; }
+.title-only-text { display: none; }
+.title-only .title-only-text { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; padding: 8cqw; color: var(--ink); font-size: max(24px, 8cqw); font-weight: 800; line-height: .98; letter-spacing: -.03em; text-align: center; text-transform: uppercase; overflow-wrap: anywhere; }
 .a4-sheet.format-three .card-foot { bottom: 3.3cqw; }
