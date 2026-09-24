@@ -11,8 +11,8 @@ type BristolData = {
 }
 
 const defaults: BristolData = {
-  name: 'M. Ahmed Benali',
-  title: 'Directeur général',
+  name: 'M. Ahmed Bartchiret',
+  title: "Président de l'ANGE",
   institution: 'Agence nationale de gestion des élections',
   date: '24 septembre 2026',
   eyebrow: 'Honneur & protocole',
