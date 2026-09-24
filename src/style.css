@@ -123,3 +123,8 @@ footer { display: flex; justify-content: space-between; padding: 19px clamp(22px
   .a4-sheet:not(.format-three) .card-copy h3 { margin: 0; }
   .a4-sheet:not(.format-three) .gold-rule { margin: 0 auto; }
 }
+
+.card-foot { display: block; max-height: 2.5em; overflow: hidden; white-space: normal; }
+@media (max-width: 500px) {
+  .format-three .card-foot { bottom: 9px; font-size: 7px; letter-spacing: .08em; max-height: 2.5em; }
+}
