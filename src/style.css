@@ -148,4 +148,7 @@ footer { display: flex; justify-content: space-between; padding: 19px clamp(22px
 .a4-sheet.format-three .card-copy { width: 78%; max-width: 57.85cqw; }
 .a4-sheet:not(.format-three) .card-content img { width: 19.5cqw; height: 19.5cqw; max-width: 19.5cqw; max-height: 19.5cqw; }
 .a4-sheet.format-three .card-content img { width: 19.5cqw; height: 19.5cqw; max-width: 19.5cqw; max-height: 19.5cqw; }
+.a4-sheet .bristol-card::after { inset: 1.98cqw; }
+.a4-sheet .bristol-card::before { inset: 2.64cqw; }
+.a4-sheet .card-foot { font-size: max(7px, 1.16cqw); }
 .a4-sheet.format-three .card-foot { bottom: 3.3cqw; }
