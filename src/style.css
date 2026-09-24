@@ -65,6 +65,7 @@ footer { display: flex; justify-content: space-between; padding: 19px clamp(22px
   .a4-sheet:not(.format-three) .card-content { gap: 6px; }
   .a4-sheet:not(.format-three) .card-content img { width: 52px; height: 52px; max-width: 18vw; max-height: 18vw; }
   .a4-sheet:not(.format-three) .card-copy h3 { font-size: clamp(16px, 6vw, 23px); }
+  .a4-sheet:not(.format-three) .card-copy { max-height: 100px; }
   .a4-sheet:not(.format-three) .preview-title { font-size: 12px; }
   .a4-sheet:not(.format-three) .preview-institution { font-size: 9px; }
   .format-three .card-content { gap: 5px; }
@@ -100,4 +101,25 @@ footer { display: flex; justify-content: space-between; padding: 19px clamp(22px
     right: 0;
     border-right-color: var(--border);
   }
+}
+
+/* Keep custom text inside the fixed printable panels. */
+.card-content { min-width: 0; overflow: hidden; }
+.card-copy { width: min(90%, 430px); min-width: 0; overflow: hidden; }
+.card-eyebrow, .preview-name, .preview-title, .preview-institution, .card-foot { overflow-wrap: anywhere; word-break: break-word; }
+.card-eyebrow, .preview-name, .preview-title, .preview-institution { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; }
+.card-eyebrow { -webkit-line-clamp: 2; }
+.preview-name { -webkit-line-clamp: 2; }
+.preview-title { -webkit-line-clamp: 2; }
+.preview-institution { -webkit-line-clamp: 3; }
+.card-foot { padding: 0 24px; line-height: 1.25; -webkit-line-clamp: 2; }
+.format-three .card-copy { width: min(78%, 390px); }
+.a4-sheet:not(.format-three) .card-copy { max-height: calc(100% - 8px); }
+.a4-sheet:not(.format-three) .preview-institution { -webkit-line-clamp: 2; max-height: 2.5em; }
+@media (max-width: 500px) {
+  .a4-sheet:not(.format-three) .card-copy { max-height: 100px; }
+  .a4-sheet:not(.format-three) .preview-institution { max-height: 2.5em; }
+  .a4-sheet:not(.format-three) .card-copy { display: grid; grid-template-rows: minmax(0, 18px) minmax(0, 2.2em) minmax(0, 2.2em) 1px minmax(0, 2.5em); gap: 2px; align-content: center; }
+  .a4-sheet:not(.format-three) .card-copy h3 { margin: 0; }
+  .a4-sheet:not(.format-three) .gold-rule { margin: 0 auto; }
 }
