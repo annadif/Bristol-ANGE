@@ -63,12 +63,12 @@ footer { display: flex; justify-content: space-between; padding: 19px clamp(22px
   .a4-sheet { width: 100%; }
   .bristol-card { padding: 12px; }
   .a4-sheet:not(.format-three) .card-content { gap: 6px; }
-  .a4-sheet:not(.format-three) .card-content img { width: 76px; height: 76px; }
+  .a4-sheet:not(.format-three) .card-content img { width: 52px; height: 52px; max-width: 18vw; max-height: 18vw; }
   .a4-sheet:not(.format-three) .card-copy h3 { font-size: clamp(16px, 6vw, 23px); }
   .a4-sheet:not(.format-three) .preview-title { font-size: 12px; }
   .a4-sheet:not(.format-three) .preview-institution { font-size: 9px; }
   .format-three .card-content { gap: 5px; }
-  .format-three .card-content img { width: 42px; height: 42px; }
+  .format-three .card-content img { width: 32px; height: 32px; max-width: 11vw; max-height: 11vw; }
   .format-three .card-copy { max-width: 78%; }
   .format-three .card-eyebrow { font-size: 7px; letter-spacing: .08em; }
   .format-three .card-copy h3 { margin: 4px 0 2px; font-size: 14px; }
