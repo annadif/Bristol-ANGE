@@ -68,7 +68,7 @@ footer { display: flex; justify-content: space-between; padding: 19px clamp(22px
   .a4-sheet:not(.format-three) .preview-title { font-size: 12px; }
   .a4-sheet:not(.format-three) .preview-institution { font-size: 9px; }
   .format-three .card-content { gap: 5px; }
-  .format-three .card-content img { width: 32px; height: 32px; max-width: 11vw; max-height: 11vw; }
+  .format-three .card-content img { width: 48px; height: 48px; max-width: 14vw; max-height: 14vw; }
   .format-three .card-copy { max-width: 78%; }
   .format-three .card-eyebrow { font-size: 7px; letter-spacing: .08em; }
   .format-three .card-copy h3 { margin: 4px 0 2px; font-size: 14px; }
